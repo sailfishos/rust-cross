@@ -17,9 +17,7 @@
 Name:          rust-cross
 Version:       1.0+git1
 Release:       1
-Source0:       rust-cross-aarch64.spec
-Source10:      rust-cross-template.spec
-Source20:      precheckin.sh
+Source10:      precheckin.sh
 # These come from the latest_i486 repo
 BuildRequires: rust-std-static-%{rust_x86_triple}
 BuildRequires: rust-std-static-%{native_triple}
