@@ -15,7 +15,7 @@
 %global rel %(rpm -qi rust-std-static-%{rust_x86_triple} | grep Release | cut -f2 -d:)
 
 Name:          rust-cross
-Version:       1.0+git1
+Version:       1.0+git2
 Release:       1
 Source10:      precheckin.sh
 # These come from the latest_i486 repo
@@ -32,6 +32,7 @@ The main package isn't built
 
 %package -n rust-std-static-%{native_triple}
 # This package is built as an {arch}.rpm and provides the native libs
+# So it also provides the default std-static libraries
 Provides: rust-std-static
 Summary:       Standard library for Rust (%{native_triple})
 
@@ -43,7 +44,6 @@ These packages were build by the x86 rust package and imported.
 
 %package -n rust-std-static-%{rust_x86_triple}
 # This package is built as an {arch}.rpm and provides the x86 libs
-Provides: rust-std-static
 Summary:       Standard library for Rust (%{rust_x86_triple})
 
 %description -n rust-std-static-%{rust_x86_triple}
@@ -70,7 +70,6 @@ tar --no-recursion -T allfiles -cpf - | ( cd %buildroot && fakeroot tar -xvpf - 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-# The %%{triple} files become native and the x86 become alien
 %files -n rust-std-static-%{native_triple}
 %defattr(-,root,root)
 %dir %{_libdir}

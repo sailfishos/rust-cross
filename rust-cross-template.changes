@@ -1,3 +1,6 @@
+* Thu Feb 04 2021 David Greaves <david.greaves@jolla.com> - 1.0+git2
+- Provide default std-static from correct package. JB#50499
+
 * Fri Jan 22 2021 David Greaves <david.greaves@jolla.com> - 1.0+git1
 - Cross package binaries built by rust. JB#50499
 
