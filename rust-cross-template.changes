@@ -1,3 +1,6 @@
+* Fri Feb 05 2021 Martin Kampas <martin.kampas@jolla.com> - 1.0+git3
+- Add wrapper for host-gcc used as a host-compatible linker by rustc. JB#52983
+
 * Thu Feb 04 2021 David Greaves <david.greaves@jolla.com> - 1.0+git2
 - Provide default std-static from correct package. JB#50499
 
