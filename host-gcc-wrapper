@@ -1,0 +1,25 @@
+#!/bin/bash
+# Ensures that host-gcc can reach rust libraries located under the tools root,
+# which may or may not be separated from host root.  ("host-gcc" is a symbolic
+# command name recognized by scratchbox2.)
+
+if [[ ! $SBOX_SESSION_DIR ]]; then
+    echo "$0: Must be executed inside scratchbox2 sandbox" >&2
+    exit 1
+fi
+
+# Assume that /bin/bash is accelerated, so the real binary is located under
+# tools root. This way we can find tools root easily.
+sbox_tools_root=${__SB2_REAL_BINARYNAME%/bin/bash}
+if [[ $sbox_tools_root == $__SB2_REAL_BINARYNAME ]]; then
+    echo "$0: Failed to determine sb2's tools root" >&2
+    exit 1
+fi
+
+# There may not be a separate tools root.
+if [[ ! $sbox_tools_root ]]; then
+    exec host-gcc "$@"
+fi
+
+rustlib=/usr/lib/rustlib
+exec host-gcc "${@//$rustlib/$sbox_tools_root$rustlib}"

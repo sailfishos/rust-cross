@@ -15,9 +15,10 @@
 %global rel %(rpm -qi rust-std-static-%{rust_x86_triple} | grep Release | cut -f2 -d:)
 
 Name:          rust-cross
-Version:       1.0+git2
+Version:       1.0+git3
 Release:       1
 Source10:      precheckin.sh
+Source11:      host-gcc-wrapper
 # These come from the latest_i486 repo
 BuildRequires: rust-std-static-%{rust_x86_triple}
 BuildRequires: rust-std-static-%{native_triple}
@@ -66,6 +67,9 @@ cat files_for_%{native_triple} files_for_%{rust_x86_triple} > allfiles
 
 # Copy files to buildroot and preserve permissions.
 tar --no-recursion -T allfiles -cpf - | ( cd %buildroot && fakeroot tar -xvpf - ) > filesincluded
+
+mkdir -p %buildroot/usr/lib/rustlib/%{rust_x86_triple}/bin
+install -m 755 host-gcc-wrapper %buildroot%_libdir/rustlib/%{rust_x86_triple}/bin/%{rust_x86_triple}-gcc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
