@@ -69,7 +69,7 @@ cat files_for_%{native_triple} files_for_%{rust_x86_triple} > allfiles
 tar --no-recursion -T allfiles -cpf - | ( cd %buildroot && fakeroot tar -xvpf - ) > filesincluded
 
 mkdir -p %buildroot/usr/lib/rustlib/%{rust_x86_triple}/bin
-install -m 755 host-gcc-wrapper %buildroot%_libdir/rustlib/%{rust_x86_triple}/bin/%{rust_x86_triple}-gcc
+install -m 755 %{SOURCE11} %buildroot%_libdir/rustlib/%{rust_x86_triple}/bin/%{rust_x86_triple}-gcc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
