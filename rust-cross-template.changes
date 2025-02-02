@@ -1,3 +1,6 @@
+* Mon Feb 03 2025 Matti Lehtimäki <matti.lehtimaki@jolla.com> - 1.0+git4
+- Add support for x86_64 host. JB#63082
+
 * Fri Feb 05 2021 Martin Kampas <martin.kampas@jolla.com> - 1.0+git3
 - Add wrapper for host-gcc used as a host-compatible linker by rustc. JB#52983
 
